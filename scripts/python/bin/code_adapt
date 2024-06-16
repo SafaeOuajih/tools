@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+# Purpose: code adapt
+
+import os
+import sys
+
+def replace_in_file(file_path, new_name):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        file_data = file.read()
+
+    file_data = file_data.replace("xxx", new_name.lower())
+    file_data = file_data.replace("XXX", new_name.upper())
+
+    with open(file_path, 'w', encoding='utf-8') as file:
+        file.write(file_data)
+
+def rename_file(old_path, new_name):
+    dir_name = os.path.dirname(old_path)
+    base_name = os.path.basename(old_path)
+
+    new_base_name = base_name.replace("xxx", new_name.lower())
+    new_base_name = new_base_name.replace("XXX", new_name.upper())
+
+    new_path = os.path.join(dir_name, new_base_name)
+    os.rename(old_path, new_path)
+    return new_path
+
+def process_directory(directory_path, new_name):
+    for root, _, files in os.walk(directory_path):
+        for file_name in files:
+            file_path = os.path.join(root, file_name)
+            replace_in_file(file_path, new_name)
+            rename_file(file_path, new_name)
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python script.py <path_to_directory> <new_name>")
+        sys.exit(1)
+
+    directory_path = sys.argv[1]
+    new_name = sys.argv[2]
+
+    if not os.path.isdir(directory_path):
+        print(f"Error: {directory_path} is not a valid directory.")
+        sys.exit(1)
+
+    process_directory(directory_path, new_name)
