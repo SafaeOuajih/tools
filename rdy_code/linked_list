@@ -1,8 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+struct NODE {
+	int data;
+	struct NODE *next;
+};
 
+void rm_node(struct NODE **head)
+{
+	struct NODE *new_node = (struct NODE *)malloc(sizeof(struct NODE));
+	struct NODE *tmp = *head;
+	struct NODE *latch;
+	new_node->data = 1;
+	new_node->next = NULL;
 
-int linked_list(){
+	while (tmp->next) {
+		latch = tmp;
+		tmp = tmp->next;
+	}
 
+	free(tmp);
+	latch->next = NULL;
+}
+
+void add_node(struct NODE **head)
+{
+	struct NODE *new_node = (struct NODE *)malloc(sizeof(struct NODE));
+	struct NODE *tmp = *head;
+	new_node->data = 1;
+	new_node->next = NULL;
+
+	while (tmp->next) {
+		tmp = tmp->next;
+	}
+	tmp->next = new_node;
 }
