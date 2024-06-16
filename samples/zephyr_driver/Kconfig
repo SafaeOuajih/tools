@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig XXX
+	bool "todo"
+	help
+	  todo
+
+if XXX
+
+module = XXX
+module-str = xxx
+source "subsys/logging/Kconfig.template.log_config"
+
+config	XXX_OPT
+	bool "todo"
+	default y
+	help
+	  todo
+endif
