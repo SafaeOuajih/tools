@@ -1,0 +1,5 @@
+
+#define BIT(x)       (1 << x)
+#define SET(x, y)    (y | BIT(x))
+#define CLEAR(x, y)  (y & ~BIT(x))
+#define TOGGLE(x, y) (y ^ BIT(x))
